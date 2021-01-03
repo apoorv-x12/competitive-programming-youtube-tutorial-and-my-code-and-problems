@@ -1,1 +1,42 @@
 
+#include <bits/stdc++.h>
+using namespace std;
+
+void bfs(int u, vector<int>* g,bool* v,queue<int>& q){
+    v[u]=1;
+    q.push(u);
+    while(!q.empty()){
+        int node=q.front();
+        q.pop();
+        cout<<node<<" ";
+        for(auto it:g[node]){
+            if(!v[it]){
+                v[it]=1;
+                q.push(it);
+            }
+        }
+    }
+    cout<<endl;
+    
+}
+int main()
+{
+    int n,m,u,v1;
+    cin>>n>>m;
+    vector<int> g[n+1];
+     bool v[n+1];
+    queue<int> q;
+    memset(v,0,sizeof(v));
+ 
+    // taking input for ad. list
+    while(m--){
+        cin>>u>>v1;
+        g[u].push_back(v1);
+        g[v1].push_back(u);
+    }
+    bfs(1,g,v,q);
+    for(auto i:v)
+    cout<<i<<" ";
+
+    return 0;
+}
